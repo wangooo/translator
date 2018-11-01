@@ -2,7 +2,7 @@
     <div id="translateForm">
         <form v-on:submit='formSubmit'>
         <input v-model="textToTranslate" type="text" placeholder="请输入要翻译的内容">
-        <select>
+        <select v-model="selectValue">
             <option value="en">en</option>
             <option value="japenese">japenese</option>
             <option value="korea">korea</option>
@@ -20,13 +20,13 @@ export default {
     // },
     data:function(){
         return {
-            textToTranslate:""
+            textToTranslate:"",
+            selectValue:"en",
         }
     },//使用函数返回的data而不用直接调用的原因是：防止其他组件使用此组件时改变data数据，用函数则可以保护作用域
     methods:{
         formSubmit:function(e){
-            // alert(this.textToTranslate);
-            this.$emit("submitText",this.textToTranslate);
+            this.$emit("submitText",this.textToTranslate,this.selectValue);
             e.preventDefault();
         }
     }
